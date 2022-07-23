@@ -12,7 +12,7 @@ android {
     defaultConfig {
         minSdk 21
         targetSdk 32
-
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -22,7 +22,11 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -51,4 +55,6 @@ dependencies {
     implementation 'androidx.room:room-runtime:2.4.2'
     implementation "androidx.room:room-ktx:2.4.2"
     kapt 'androidx.room:room-compiler:2.4.2'
+
+
 }
