@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ZRadio</string>
+    <string name="radio_logo">Radio Logo</string>
+    <string name="name">name</string>
+    <string name="state">state</string>
+    <string name="favorite">favorite</string>
+    <string name="title_favorite">Favorite</string>
+</resources>

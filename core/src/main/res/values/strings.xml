@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="radio_logo">Radio Logo</string>
+    <string name="name">name</string>
+    <string name="state">state</string>
+    <string name="favorite">favorite</string>
+</resources>
