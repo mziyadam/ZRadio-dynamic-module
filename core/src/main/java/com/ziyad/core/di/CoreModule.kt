@@ -1,7 +1,3 @@
-@file:Suppress("SpellCheckingInspection", "SpellCheckingInspection", "SpellCheckingInspection",
-    "SpellCheckingInspection", "SpellCheckingInspection", "SpellCheckingInspection"
-)
-
 package com.ziyad.core.di
 
 import androidx.room.Room
@@ -11,7 +7,6 @@ import com.ziyad.core.data.source.local.room.RadioDatabase
 import com.ziyad.core.data.source.remote.RemoteDataSource
 import com.ziyad.core.data.source.remote.network.ApiService
 import com.ziyad.core.domain.repository.IRadioRepository
-import com.ziyad.core.utils.AppExecutors
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
 import okhttp3.CertificatePinner
@@ -67,6 +62,5 @@ val networkModule = module {
 val repositoryModule = module {
     single { LocalDataSource(get()) }
     single { RemoteDataSource(get()) }
-    factory { AppExecutors() }
-    single<IRadioRepository> { RadioRepository(get(), get(), get()) }
+    single<IRadioRepository> { RadioRepository(get(), get()) }
 }

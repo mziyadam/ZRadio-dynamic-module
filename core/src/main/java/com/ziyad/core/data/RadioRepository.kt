@@ -5,31 +5,19 @@ import com.ziyad.core.data.source.local.entity.RadioEntity
 import com.ziyad.core.data.source.remote.RemoteDataSource
 import com.ziyad.core.domain.model.Radio
 import com.ziyad.core.domain.repository.IRadioRepository
-import com.ziyad.core.utils.AppExecutors
 import com.ziyad.core.utils.DataMapper
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.runBlocking
 
 class RadioRepository(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
-    private val appExecutors: AppExecutors
+//    private val appExecutors: AppExecutors
 ) : IRadioRepository {
 
-//    companion object {
-//        @Volatile
-//        private var instance: RadioRepository? = null
-//
-//        fun getInstance(
-//            remoteData: RemoteDataSource,
-//            localData: LocalDataSource,
-//            appExecutors: AppExecutors
-//        ): RadioRepository =
-//            instance ?: synchronized(this) {
-//                instance ?: RadioRepository(remoteData, localData, appExecutors)
-//            }
-//    }
 
     override fun getFavoriteRadio(): Flow<List<Radio>> {
         return localDataSource.getFavoriteRadio().map {
@@ -39,7 +27,8 @@ class RadioRepository(
 
     override fun setFavoriteRadio(radio: Radio, isFavorite: Boolean) {
         val radioEntity = DataMapper.mapDomainToEntity(radio)
-        appExecutors.diskIO().execute { localDataSource.setFavoriteRadio(radioEntity, isFavorite) }
+//        appExecutors.diskIO().execute { localDataSource.setFavoriteRadio(radioEntity, isFavorite) }
+        runBlocking(Dispatchers.IO) { localDataSource.setFavoriteRadio(radioEntity, isFavorite) }
     }
 
     override suspend fun getAll(): Flow<List<Radio>> {

@@ -1,5 +1,3 @@
-@file:Suppress("unused")
-
 package com.ziyad.zradio
 
 import android.app.Application
